@@ -1,6 +1,32 @@
-# Project exclude paths
-/example/target/
-/rpc-client/target/
-/rpc-common/target/
-/rpc-core/target/
-/rpc-server/target/
+# 忽略所有 .class 文件
+*.class
+
+# 忽略 IDEA 自身生成的文件和目录
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Maven 忽略
+target/
+**/target/
+
+# Gradle 忽略
+build/
+**/build/
+
+
+# 忽略日志文件
+logs/
+*.log
+
+# 忽略其他临时文件
+*.tmp
+*.bak
+*.swp
+.DS_Store
+
+# 忽略 JAR/WAR/EAR 文件
+*.jar
+*.war
+*.ear

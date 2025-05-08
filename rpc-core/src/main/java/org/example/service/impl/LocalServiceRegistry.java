@@ -30,7 +30,7 @@ public class LocalServiceRegistry implements ServiceRegistry {
         }
         // 设置键值
         jedis.set(serviceName, json);
-
+        jedis.close();
 //        SERVICE_MAP.put(serviceName, inetSocketAddress);
     }
 
@@ -46,6 +46,7 @@ public class LocalServiceRegistry implements ServiceRegistry {
             throw new RuntimeException(e);
         }
         InetSocketAddress restoredAddress = wrapper.toInetSocketAddress();
+        jedis.close();
 
         return restoredAddress;
 
