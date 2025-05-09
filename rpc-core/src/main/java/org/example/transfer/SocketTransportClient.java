@@ -38,6 +38,7 @@ public class SocketTransportClient implements TransportClient {
 
     private void connect() throws IOException {
         if (socket == null) {
+            // 如果这行代码没有抛出异常（如IOException），则表示TCP三次握手已完成，客户端与服务端（localhost:8080）的连接已成功建立。
             socket = new Socket(host, port);
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             inputStream = new ObjectInputStream(socket.getInputStream());
