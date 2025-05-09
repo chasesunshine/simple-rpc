@@ -36,16 +36,19 @@ public class RpcServer {
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                executor.execute(() -> {
-                    try (ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-                         ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream())) {
+                executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try (ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+                             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream())) {
 
-                        RpcRequest request = (RpcRequest) input.readObject();
-                        RpcResponse response = requestHandler.handle(request);
-                        output.writeObject(response);
-                        output.flush();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                            RpcRequest request = (RpcRequest) input.readObject();
+                            RpcResponse response = requestHandler.handle(request);
+                            output.writeObject(response);
+                            output.flush();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
